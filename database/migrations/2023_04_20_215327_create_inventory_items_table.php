@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('inventory_items', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_id');
+            $table->integer('quantity');
+            $table->text('color');
+            $table->text('size');
+            $table->double('weight');
+            $table->integer('price_cents');
+            $table->integer('sale_price_cents');
+            $table->integer('cost_cents');
+            $table->string('sku', 255);
+            $table->double('length');
+            $table->double('width');
+            $table->double('height');
+            $table->text('note');
             $table->timestamps();
         });
     }
