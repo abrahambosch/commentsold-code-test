@@ -34,7 +34,7 @@ class OrderSeeder extends Seeder
             
             $rows++;
         }
-        echo "$rows order records cresated. \n";
+        $this->command->info("$rows order records cresated. ");
     }
 
     /**

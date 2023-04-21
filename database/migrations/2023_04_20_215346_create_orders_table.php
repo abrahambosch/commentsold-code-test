@@ -1,42 +1,13 @@
 <?php
 
+use App\Models\InventoryItem;
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
-
-    /**
-id int 
-product_id int 
-street_address text 
-apartment text
-city text 
-state text 
-country_code string 
-zip text 
-phone_number string 
-email text 
-name string 
-order_status string 
-payment_ref text 
-transaction_id string 
-payment_amt_cents int 
-ship_charged_cents int 
-ship_cost_cents int 
-subtotal_cents int 
-total_cents int 
-shipper_name text 
-payment_date timestamp 
-shipped_date timestamp 
-tracking_number text 
-tax_total_cents int 
-created_at timestamp 
-updated_at timestamp
-
-     */
     /**
      * Run the migrations.
      */
@@ -44,8 +15,10 @@ updated_at timestamp
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer("inventory_id"); 
-            $table->integer("product_id"); 
+            $table->foreignIdFor(InventoryItem::class,  'inventory_id');
+            $table->foreign('inventory_id')->references('id')->on('inventory_items');
+            $table->foreignIdFor(Product::class);
+            $table->foreign('product_id')->references('id')->on('products');
             $table->text("street_address"); 
             $table->text("apartment"); 
             $table->text("city"); 

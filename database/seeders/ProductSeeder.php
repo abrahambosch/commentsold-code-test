@@ -30,6 +30,6 @@ class ProductSeeder extends Seeder
 
             $rows++;
         }
-        echo "$rows product records cresated. \n";
+        $this->command->info("$rows product records cresated. ");
     }
 }

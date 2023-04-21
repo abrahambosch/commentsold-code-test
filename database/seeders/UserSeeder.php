@@ -73,6 +73,6 @@ class UserSeeder extends Seeder
 
             $rows++;
         }
-        echo "$rows user records cresated. \n";
+        $this->command->info("$rows user records cresated. ");
     }
 }

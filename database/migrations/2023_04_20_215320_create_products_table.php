@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +13,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            // "id","product_name","description","style","brand","created_at","updated_at","url","product_type","shipping_price","note","admin_id"
             $table->id();
             $table->string('product_name', 255);
             $table->text('description');
@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('product_type', 50);
             $table->integer('shipping_price');
             $table->text('note');
-            $table->integer('admin_id');
+            $table->foreignIdFor(User::class,  'admin_id');
+            $table->foreign('admin_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

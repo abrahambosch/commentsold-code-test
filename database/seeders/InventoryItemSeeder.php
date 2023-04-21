@@ -30,6 +30,6 @@ class InventoryItemSeeder extends Seeder
 
             $rows++;
         }
-        echo "$rows inventory records cresated. \n";
+        $this->command->info("$rows inventory records cresated. ");
     }
 }
