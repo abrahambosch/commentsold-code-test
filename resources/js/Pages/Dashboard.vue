@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -15,6 +15,26 @@ import { Head } from '@inertiajs/vue3';
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">You're logged in!</div>
+                    <div class="p-6">
+                        <Link
+                            :href="
+                                route(
+                                    'products.index'
+                                )
+                            "
+                            class="px-4 py-2 text-white bg-blue-600 rounded-lg" >Products</Link
+                        >
+                    </div>
+                    <div class="p-6">
+                        <Link
+                            :href="
+                                route(
+                                    'orders.index'
+                                )
+                            "
+                            class="px-4 py-2 text-white bg-blue-600 rounded-lg" >Orders</Link
+                        >
+                    </div>
                 </div>
             </div>
         </div>

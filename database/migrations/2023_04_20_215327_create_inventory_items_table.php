@@ -29,6 +29,7 @@ return new class extends Migration
             $table->double('height');
             $table->text('note');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

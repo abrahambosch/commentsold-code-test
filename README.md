@@ -1,4 +1,16 @@
 # CommentSold Code Test
+ 
+
+## Notes
+- Laravel 10 with Laravel Breeze, VueJS + Inertia.
+- used soft deletes for product and inventory because an order may reference them. 
+
+
+## Documentation
+- Laravel - https://laravel.com/docs/10.x/
+- Intertia - https://inertiajs.com/
+- VueJS - https://vuejs.org/
+- Useful Tutorial - https://larainfo.com/blogs/laravel-9-inertia-vue-3-crud-tutorial-example
 
 ## Install Laravel and push to Github 
 ```
@@ -74,7 +86,7 @@ sail php artisan migrate:rollback
 
 ## Seeding the database
 ```
-php artisan db:seed --class=UserSeeder
+sail php artisan db:seed --class=UserSeeder
 sail php artisan db:seed --class=ProductSeeder
 sail php artisan db:seed --class=InventoryItemSeeder
 sail php artisan db:seed --class=OrderSeeder
