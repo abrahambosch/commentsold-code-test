@@ -69,10 +69,13 @@ function destroy(id) {
                                     SKUs
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    
+                                    Revenue
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+
                                 </th>
                                 <th scope="col" class="px-6     ">
-                                    
+
                                 </th>
                             </tr>
                         </thead>
@@ -104,6 +107,9 @@ function destroy(id) {
                                     {{ product.skus }}
                                 </td>
                                 <td class="px-6 py-4">
+                                    ${{ Number(product.revenue).toFixed(2) }}
+                                </td>
+                                <td class="px-6 py-4">
                                     <Link
                                         :href="
                                             route(
@@ -114,14 +120,14 @@ function destroy(id) {
                                         class="px-4 py-2 text-white bg-blue-600 rounded-lg" >Edit</Link
                                     >
                                     </td>
-                                <td class="px-6 py-4">    
+                                <td class="px-6 py-4">
                                     <PrimaryButton
                                         class="bg-red-700"
                                         @click="destroy(product.id)"
                                     >
                                         Delete
                                     </PrimaryButton>
-                                   
+
                                 </td>
                             </tr>
                         </tbody>

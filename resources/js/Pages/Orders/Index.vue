@@ -100,7 +100,10 @@ const props = defineProps({
                                 <td>{{ order.color }}</td>
                                 <td>{{ order.size }}</td>
                                 <td>{{ order.order_status }}</td>
-                                <td>{{ order.total_cents }}</td>
+                                <td>${{ Number(order.total_cents / 100).toLocaleString(undefined, {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                }) }}</td>
                                 <td>{{ order.transaction_id }}</td>
                                 <td>{{ order.shipper_name }}</td>
                                 <td>{{ order.tracking_number }}</td>

@@ -17,11 +17,12 @@ const form = useForm({
     brand: props.product.brand,
     url: props.product.url,
     product_type: props.product.product_type,
-    shipping_price: props.product.shipping_price,
+    shipping_price: Number(props.product.shipping_price / 100).toFixed(2),
     note: props.product.note,
 });
 
 const submit = () => {
+    form.shipping_price = form.shipping_price * 100;
     if (props.product.id) {
         form.put(route("products.update", props.product.id));
     } else {
@@ -42,8 +43,9 @@ const submit = () => {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="p-12 sm:p-8 bg-white shadow sm:rounded-lg">
-                    Product: <pre>{{ product }}</pre>
-                 
+                    <pre>
+                    {{ props.product }}
+                    </pre>
                     <form @submit.prevent="submit">
                             <div class="mb-6">
                                 <label

@@ -11,26 +11,25 @@ class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      */
     public function index(Request $request)
     {
-        // Provide a list of products tied to the user account 
-        // name, style, brand, (optionally) available sku’s 
-        // (optionally) Allow the user to create a new product, edit an existing product or delete a product 
+        // Provide a list of products tied to the user account
+        // name, style, brand, (optionally) available sku’s
+        // (optionally) Allow the user to create a new product, edit an existing product or delete a product
         $user = $request->user();
 
         $skuQuery = DB::table("products")
         ->leftJoin("inventory_items", 'products.id', '=', 'inventory_items.product_id')
-        ->select(DB::raw('GROUP_CONCAT(inventory_items.sku) as skus, products.id'))
+        ->select(DB::raw('GROUP_CONCAT(inventory_items.sku) as skus, sum(price_cents * quantity) as revenue, products.id'))
         ->where('products.admin_id', '=', $user->id)
         ->groupBy('id');
 
         $productsQuery = Product::where('admin_id', $user->id)->leftJoinSub($skuQuery, "skus", function ($join) {
             $join->on('products.id', '=', 'skus.id');
         });
-        
-        //echo $productsQuery->toSql(); die;  
+        //echo $productsQuery->toSql(); die;
         $products = $productsQuery->paginate(20);
 
         return Inertia::render('Products/Index', [
@@ -53,7 +52,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        echo __METHOD__; die; 
         $data = $request->validate([
             'product_name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -64,8 +62,8 @@ class ProductController extends Controller
             'shipping_price' => 'required|integer',
             'note' => 'required|nullable|string',
         ]);
-        
-        $product = new Product(); 
+
+        $product = new Product();
         $product->admin_id = $request->user()->id;
         $product->product_name = $data['product_name'];
         $product->description = $data['description'];
@@ -75,7 +73,7 @@ class ProductController extends Controller
         $product->product_type = $data['product_type'];
         $product->shipping_price = $data['shipping_price'];
         $product->note = $data['note'];
-        $product->save(); 
+        $product->save();
 
 
 
@@ -118,7 +116,7 @@ class ProductController extends Controller
             'shipping_price' => 'required|integer',
             'note' => 'required|nullable|string',
         ]);
-        
+
         $product->product_name = $data['product_name'];
         $product->description = $data['description'];
         $product->style = $data['style'];
@@ -127,7 +125,7 @@ class ProductController extends Controller
         $product->product_type = $data['product_type'];
         $product->shipping_price = $data['shipping_price'];
         $product->note = $data['note'];
-        $product->save(); 
+        $product->save();
 
         return redirect()->route('products.index')->with('message', 'Product Updated Successfully');
     }
